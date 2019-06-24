@@ -19,4 +19,12 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
+
+    <string name="web_client_id">221240294449-lgghmukosp3jpu6h9ub6ctn90imo01vg.apps.googleusercontent.com</string>
+    <string name="content_text">Login/ Signup</string>
+
+    <string name="Name_label">Name</string>
+    <string name="Email_label">Email</string>
+    <string name="Id_label">Id</string>
+    <string name="Logout_label">Logout</string>
 </resources>
