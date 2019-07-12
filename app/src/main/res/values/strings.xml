@@ -27,4 +27,19 @@
     <string name="Email_label">Email</string>
     <string name="Id_label">Id</string>
     <string name="Logout_label">Logout</string>
+
+    <array name="blood_group">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </array>
+    <array name="gender_grp">
+        <item>Male</item>
+        <item>Female</item>
+    </array>
 </resources>

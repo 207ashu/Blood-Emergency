@@ -44,5 +44,12 @@
             android:id="@+id/logoutBtn"
             android:text="@string/Logout_label"
             android:layout_marginTop="30dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_info"
+            android:text="Profile Information"
+            android:layout_marginTop="30dp"/>
+
     </LinearLayout>
 </RelativeLayout>

@@ -25,7 +25,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 
 
 public class ProfileActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    Button logoutBtn;
+    Button logoutBtn, btn_info;
     TextView userName,userEmail,userId;
     ImageView profileImage;
     private GoogleApiClient googleApiClient;
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
         userEmail = findViewById(R.id.email);
         userId = findViewById(R.id.userId);
         profileImage = findViewById(R.id.profileImage);
-
+        btn_info = findViewById(R.id.btn_info);
         gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -60,12 +60,22 @@ public class ProfileActivity extends AppCompatActivity implements GoogleApiClien
                             @Override
                             public void onResult(Status status) {
                                 if (status.isSuccess()){
+                                    SaveSharedPreference.setUserName(ProfileActivity.this,"");
                                     gotoMainActivity();
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Session not close", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
+            }
+        });
+        btn_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ProfileActivity.this, FormActivity.class);
+                intent.putExtra("Username", userName.getText().toString());
+                intent.putExtra("Email", userEmail.getText().toString());
+                startActivity(intent);
             }
         });
     }

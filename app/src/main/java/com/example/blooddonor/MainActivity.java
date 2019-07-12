@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
+        {
+            Log.d(TAG, "No saved instance");
+        }
+        else
+        {
+            gotoProfile();
+        }
         firebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
         //this is where we start the Auth state Listener to listen for whether the user is signed in or not
         authStateListener = new FirebaseAuth.AuthStateListener(){
@@ -97,14 +105,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             email = account.getEmail();
             // you can store user data to SharedPreference
             AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-            firebaseAuthWithGoogle(credential);
+            firebaseAuthWithGoogle(credential, account);
         }else{
             // Google Sign In failed, update UI appropriately
             Log.e(TAG, "Login Unsuccessful. "+result);
             Toast.makeText(this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
         }
     }
-    private void firebaseAuthWithGoogle(AuthCredential credential){
+    private void firebaseAuthWithGoogle(final AuthCredential credential, final GoogleSignInAccount account){
 
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -112,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                         if(task.isSuccessful()){
+                            SaveSharedPreference.setUserName(MainActivity.this, account.getIdToken());
                             Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                             gotoProfile();
                         }else{
